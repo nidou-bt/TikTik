@@ -74,11 +74,11 @@ const VideoCard: NextPage<TProps> = ({ post }) => {
               loop
               ref={videoRef}
               src={post.video.asset.url}
-              className="lg:w[600px] h-[300px] md:h-[400px] lg:h-[530px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
+              className="lg:w-[600px] h-[300px] md:h-[400px] md:w-[400px] lg:h-[530px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
             />
           </Link>
-          {isHover && (
-            <div className="absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] p-3">
+          {true && (
+            <div className="absolute bottom-6 cursor-pointer left-0 flex gap-10 justify-around lg:w-[600px] md:w-[400px] w-[200px] p-3">
               {playing ? (
                 <button
                   className="text-black text-2xl lg:text-4xl"

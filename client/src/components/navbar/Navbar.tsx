@@ -60,7 +60,7 @@ const Navbar = () => {
               </>
             </Link>
           )}
-          <button type="button" className="px-2" onClick={handleLogout}>
+          <button type="button" className="px-2 bg-slate-200 border-2 rounded-full" onClick={handleLogout}>
             <AiOutlineLogout color="red" fontSize={21} />
           </button>
         </div>
