@@ -3,9 +3,9 @@ import Router, { useRouter } from "next/router";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import axios from "axios";
 import { SanityAssetDocument } from "@sanity/client";
-import { client } from "../config/sanity";
-import useAuthStore from "../store/authStore";
-import { topics } from "../utils/constants";
+import { client } from "@/config/sanity";
+import useAuthStore from "@/store/authStore";
+import { topics } from "@/utils/constants";
 
 const Upload = () => {
   const { userProfile } = useAuthStore();

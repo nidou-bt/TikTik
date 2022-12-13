@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,10 +12,12 @@ type TProps = {
 };
 
 const VideoCard: NextPage<TProps> = ({ post }) => {
-  const [isHover, setIsHover] = useState<Boolean>(false);
-  const [playing, setPlaying] = useState<Boolean>(false);
-  const [isVideoMuted, setIsVideoMuted] = useState<Boolean>(false);
+  const [isHover, setIsHover] = useState<boolean>(false);
+  const [playing, setPlaying] = useState<boolean>(false);
+  const [isVideoMuted, setIsVideoMuted] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  console.log('id', post._id)
 
   const onVideoPres = () => {
     if (playing) {
@@ -27,6 +29,13 @@ const VideoCard: NextPage<TProps> = ({ post }) => {
     }
     return;
   };
+
+  useEffect(() => {
+    if (videoRef?.current) {
+      videoRef.current.muted = isVideoMuted
+    }
+  }, [isVideoMuted])
+  
 
   return (
     <div className="flex flex-col border-b-2 border-gray-200 pb-6">
@@ -69,7 +78,7 @@ const VideoCard: NextPage<TProps> = ({ post }) => {
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
         >
-          <Link href="/">
+          <Link href={`/detail/${post._id}`}>
             <video
               loop
               ref={videoRef}
@@ -77,7 +86,7 @@ const VideoCard: NextPage<TProps> = ({ post }) => {
               className="lg:w-[600px] h-[300px] md:h-[400px] md:w-[400px] lg:h-[530px] w-[200px] rounded-2xl cursor-pointer bg-gray-100"
             />
           </Link>
-          {true && (
+          {isHover && (
             <div className="absolute bottom-6 cursor-pointer left-0 flex gap-10 justify-around lg:w-[600px] md:w-[400px] w-[200px] p-3">
               {playing ? (
                 <button

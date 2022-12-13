@@ -1,7 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import { client } from "@/config/sanity";
+import { allPostsQuery } from "@/utils/queries";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { client } from "../../../config/sanity";
-import { allPostsQuery } from "../../../utils/queries";
+
 
 export default async function handler(
   req: NextApiRequest,
