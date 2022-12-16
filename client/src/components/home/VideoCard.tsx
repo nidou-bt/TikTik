@@ -17,8 +17,6 @@ const VideoCard: NextPage<TProps> = ({ post }) => {
   const [isVideoMuted, setIsVideoMuted] = useState<boolean>(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  console.log('id', post._id)
-
   const onVideoPres = () => {
     if (playing) {
       videoRef.current!.pause();
@@ -32,10 +30,9 @@ const VideoCard: NextPage<TProps> = ({ post }) => {
 
   useEffect(() => {
     if (videoRef?.current) {
-      videoRef.current.muted = isVideoMuted
+      videoRef.current.muted = isVideoMuted;
     }
-  }, [isVideoMuted])
-  
+  }, [isVideoMuted]);
 
   return (
     <div className="flex flex-col border-b-2 border-gray-200 pb-6">

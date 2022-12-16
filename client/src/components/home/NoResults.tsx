@@ -1,13 +1,20 @@
-import React from 'react';
+import React from "react";
+import { MdOutlineVideocamOff } from "react-icons/md";
+import { BiCommentX } from "react-icons/bi";
 
 type TProps = {
   text: string;
-}
+};
 
-const NoResults = ({text}: TProps) => {
+const NoResults = ({ text }: TProps) => {
   return (
-    <div>NoResults</div>
-  )
-}
+    <div className="flex flex-col justify-center items-center h-full w-full">
+      <p className="text-8xl">
+        {text === "No comments yet" ? <BiCommentX /> : <MdOutlineVideocamOff />}
+      </p>
+      <p className="text-2xl text-center">{text}</p>
+    </div>
+  );
+};
 
-export default NoResults
+export default NoResults;
