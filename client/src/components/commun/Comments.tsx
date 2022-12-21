@@ -1,7 +1,9 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 import NoResults from "../home/NoResults";
 import { IUser } from "@/types/type";
+import Link from "next/link";
+import { GoVerified } from "react-icons/go";
 
 interface IProps {
   comment: string;
@@ -10,6 +12,7 @@ interface IProps {
   comments: IComment[];
   isPostingComment: boolean;
   user: IUser | null;
+  allUsers: Array<IUser> | null;
 }
 
 interface IComment {
@@ -26,17 +29,58 @@ const Comments = ({
   comments,
   isPostingComment,
   user,
+  allUsers,
 }: IProps) => {
+
   return (
     <div className="border-t-2 border-gray-200 pt-4 px-10 bg-[#F8F8F8] border-b-2 lg:pb-0 pb-[100px]">
       <div className="overflow-scroll lg:h-[475px]">
-        {comment.length ? (
-          <div>Videos</div>
+        {comments?.length > 0 ? (
+          comments.map((item, index) => {
+            return (
+              <>
+                {allUsers?.map((user) => {
+                  return (
+                    user._id === (item.postedBy._id || item.postedBy._ref) && (
+                      <div className="p-2 items-center" key={index}>
+                        <Link href={`/profile/${user._id}`}>
+                          <div className="flex items-start gap-3">
+                            <div className="w-8 h-8">
+                              <Image
+                                src={user.image}
+                                alt="user"
+                                width={34}
+                                height={34}
+                                className="rounded-full"
+                                layout="responsive"
+                              />
+                            </div>
+                            <div className="hidden xl:block">
+                              <p className="flex gap-1 items-center text-md font-bold text-primary lowercase">
+                                {user.userName.replace(" ", "")}
+                                <GoVerified className="text-blue-400" />
+                              </p>
+                              <p className="capitalize text-gray-400 text-xs">
+                                {user.userName}
+                              </p>
+                            </div>
+                          </div>
+                        </Link>
+                        <div>
+                          <p>{item.comment}</p>
+                        </div>
+                      </div>
+                    )
+                  );
+                })}
+              </>
+            );
+          })
         ) : (
           <NoResults text={"No comments yet"} />
         )}
       </div>
-      {user && (
+      {!!user && (
         <div className="absolute bottom-0 left-0 pb-6 px-2 md:px-10">
           <form onSubmit={(e) => addComment(e)}>
             <input

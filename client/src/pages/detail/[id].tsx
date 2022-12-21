@@ -25,7 +25,7 @@ const Detail = ({ postDetails }: IProps) => {
   const [user, setUser] = useState<IUser | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
-  const { userProfile } = useAuthStore();
+  const { userProfile, allUsers } = useAuthStore();
   const [comment, setComment] = useState("");
   const [isPostingComment, setIsPostingComment] = useState(false);
 
@@ -172,6 +172,7 @@ const Detail = ({ postDetails }: IProps) => {
           comments={post.comments}
           isPostingComment={isPostingComment}
           user={user}
+          allUsers={allUsers}
         />
       </div>
     </div>
