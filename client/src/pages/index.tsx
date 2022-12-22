@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from "next";
 import axios from "axios";
 import { Video } from "@/types/type";
-import VideoCard from "@/components/home/VideoCard";
+import VideoCard from "@/components/commun/VideoCard";
 import NoResults from "@/components/home/NoResults";
 import { BASE_URL } from "@/utils/constants";
 
